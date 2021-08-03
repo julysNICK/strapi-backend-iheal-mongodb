@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "name": "order",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "total": {
+      "type": "float"
+    },
+    "user_orders": {
+      "via": "orders",
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "product": {
+      "via": "orders",
+      "model": "product"
+    },
+    "user_order": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "orders_use"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "unpaid",
+        "paid"
+      ],
+      "required": false
+    }
+  }
+}

@@ -14,7 +14,7 @@ module.exports = {
     if (IsStore === true) {
       // console.log(IsStore)
       // console.log("ctx", ctx)
-      const { name, description, slug, price, image, stock } = ctx.request.body;
+      const { name, Description, slug, price, image, stock } = ctx.request.body;
       // const product = { name, description, slug, price, image, stock, user_creator: id };
       // const entity = await strapi.services.product.create(product);
 
@@ -24,7 +24,7 @@ module.exports = {
 
         entity = await strapi.services.product.create(data, { files });
       } else {
-        entity = await strapi.services.product.create({ ...ctx.query, name, description, slug, price, image, stock, user_creator: id });
+        entity = await strapi.services.product.create({ ...ctx.query, name, Description, slug, price, image, stock, user_creator: id });
       }
       return sanitizeEntity(entity, { model: strapi.models.product });
     } else {
@@ -63,7 +63,7 @@ module.exports = {
           return {
             id: entiyy.id,
             name: entiyy.name,
-            description: entiyy.description,
+            Description: entiyy.Description,
             price: entiyy.price,
             image: entiyy.image,
             stock: entiyy.stock,

@@ -9,19 +9,17 @@ module.exports = {
 
   async create(ctx) {
     const { id, IsStore } = ctx.state.user;
-
-
     if (IsStore === true) {
       // console.log(IsStore)
       // console.log("ctx", ctx)
       const { name, Description, slug, price, image, stock } = ctx.request.body;
       // const product = { name, description, slug, price, image, stock, user_creator: id };
       // const entity = await strapi.services.product.create(product);
-
       // return sanitizeEntity(entity, { model: strapi.models.product });
       if (ctx.is('multipart')) {
+        console.log(ctx)
         const { data, files } = parseMultipartData(ctx);
-
+        console.log(ctx)
         entity = await strapi.services.product.create(data, { files });
       } else {
         entity = await strapi.services.product.create({ ...ctx.query, name, Description, slug, price, image, stock, user_creator: id });
@@ -39,10 +37,10 @@ module.exports = {
       let entities;
       if (ctx.query._q) {
 
-        entities = await strapi.services.product.search({ ...ctx.query });
+        entities = await strapi.services.product.search({ ...ctx.query, user_creator: id });
 
       } else {
-        entities = await strapi.services.product.find({ ...ctx.query });
+        entities = await strapi.services.product.find({ ...ctx.query, user_creator: id });
 
       }
 

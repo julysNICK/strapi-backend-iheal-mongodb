@@ -38,27 +38,30 @@ module.exports = {
   },
   async create(ctx) {
     const { id, IsStore } = ctx.state.user;
-    const { product } = ctx.request.body;
+    const { product, total, quantity, status } = ctx.request.body;
+    console.log('request')
+    console.log(ctx.request.body)
     if (!product) {
       return ctx.throw(400, 'Missing product');
     }
     if (!IsStore) {
 
       const realProduct = await strapi.services.product.findOne({ id: product.id });
-      console.log(realProduct)
+
       if (!realProduct) {
         return ctx.throw(404, 'product not found');
       }
 
       const { user } = ctx.state;
-      console.log(user);
+
       const BASE_URL = ctx.request.headers.origin || 'http://localhost:3000' //So we can redirect back
 
       const newOrder = await strapi.services.order.create({
         user_order: user.id,
         product: realProduct.id,
-        total: realProduct.price,
-        status: 'unpaid',
+        total: total,
+        quantity: quantity,
+        status: status,
       })
 
       return { message: "order created" }
@@ -82,6 +85,7 @@ module.exports = {
             product: order.product,
             total: order.total,
             status: order.status,
+            quantity: order.quantity,
             user_order: {
               id: order.user_order.id,
               username: order.user_order.username,
@@ -99,6 +103,7 @@ module.exports = {
           product: order.product,
           total: order.total,
           status: order.status,
+          quantity: order.quantity,
           user_order: {
             id: order.user_order.id,
             username: order.user_order.username,

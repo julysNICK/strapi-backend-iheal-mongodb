@@ -36,6 +36,9 @@
         "paid"
       ],
       "required": false
+    },
+    "quantity": {
+      "type": "integer"
     }
   }
 }

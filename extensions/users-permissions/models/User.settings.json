@@ -96,6 +96,15 @@
     },
     "numberHouse": {
       "type": "string"
+    },
+    "uf": {
+      "type": "string"
+    },
+    "complement": {
+      "type": "string"
+    },
+    "district": {
+      "type": "string"
     }
   }
 }

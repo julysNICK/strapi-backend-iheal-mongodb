@@ -93,6 +93,9 @@
     "products_user": {
       "via": "user_creator",
       "collection": "product"
+    },
+    "numberHouse": {
+      "type": "string"
     }
   }
 }

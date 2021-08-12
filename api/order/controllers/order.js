@@ -104,6 +104,7 @@ module.exports = {
               username: order.user_order.username,
               email: order.user_order?.email,
               address: order.user_order?.address,
+              numberHouse: order.user_order?.numberHouse,
             },
           }
         }
@@ -122,7 +123,7 @@ module.exports = {
             username: order.user_order.username,
             email: order.user_order?.email,
             address: order.user_order?.address,
-
+            numberHouse: order.user_order?.numberHouse,
           },
         }
       })

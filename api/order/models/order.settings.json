@@ -25,9 +25,9 @@
       "model": "product"
     },
     "user_order": {
+      "via": "orders_use",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "orders_use"
+      "model": "user"
     },
     "status": {
       "type": "enumeration",

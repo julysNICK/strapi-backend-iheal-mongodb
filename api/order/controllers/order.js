@@ -4,7 +4,19 @@ const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
 
 module.exports = {
 
+  async update(ctx) {
+    const { id } = ctx.params;
+    const { IsStore } = ctx.state.user;
+    const { status } = ctx.request.body;
+    let entity;
+    if (IsStore) {
+      entity = await strapi.services.order.update({ id }, { status });
+    } else {
+      entity = await strapi.services.order.update({ id }, { status });
+    }
 
+    return sanitizeEntity(entity, { model: strapi.models.order });
+  },
 
   async find(ctx) {
     const { user } = ctx.state

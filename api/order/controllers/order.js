@@ -9,13 +9,14 @@ module.exports = {
   async find(ctx) {
     const { user } = ctx.state
     let entities;
+
     if (ctx.query._q) {
 
-      entities = await strapi.services.order.search({ ...ctx.query, user_order: user._id, });
+      entities = await strapi.services.order.search({ ...ctx.query, });
 
     } else {
 
-      entities = await strapi.services.order.find({ ...ctx.query, user_order: user._id });
+      entities = await strapi.services.order.find({ ...ctx.query });
 
     }
 
@@ -33,7 +34,7 @@ module.exports = {
     const { id } = ctx.params;
     const { user } = ctx.state
 
-    const entity = await strapi.services.order.findOne({ _id: id, user_order: user._id });
+    const entity = await strapi.services.order.findOne({ _id: id });
     return sanitizeEntity(entity, { model: strapi.models.order });
   },
   async create(ctx) {

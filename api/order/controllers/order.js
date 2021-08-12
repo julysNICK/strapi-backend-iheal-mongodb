@@ -105,6 +105,11 @@ module.exports = {
               email: order.user_order?.email,
               address: order.user_order?.address,
               numberHouse: order.user_order?.numberHouse,
+              uf: order.user_order?.uf,
+              district: order.user_order?.district,
+              complement: order.user_order?.complement,
+              cep: order.user_order?.cep,
+              city: order.user_order?.city,
             },
           }
         }
@@ -124,6 +129,11 @@ module.exports = {
             email: order.user_order?.email,
             address: order.user_order?.address,
             numberHouse: order.user_order?.numberHouse,
+            uf: order.user_order?.uf,
+            district: order.user_order?.district,
+            complement: order.user_order?.complement,
+            cep: order.user_order?.cep,
+            city: order.user_order?.city,
           },
         }
       })

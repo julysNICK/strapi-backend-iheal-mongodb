@@ -105,6 +105,9 @@
     },
     "district": {
       "type": "string"
+    },
+    "city": {
+      "type": "string"
     }
   }
 }

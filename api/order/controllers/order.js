@@ -19,20 +19,36 @@ module.exports = {
   },
 
   async find(ctx) {
-    const { user } = ctx.state
+    const { IsStore, id } = ctx.state.user;
     let entities;
+    if (IsStore === true) {
 
-    if (ctx.query._q) {
+      if (ctx.query._q) {
 
-      entities = await strapi.services.order.search({ ...ctx.query, });
+        entities = await strapi.services.order.search({ ...ctx.query });
 
+      } else {
+
+        entities = await strapi.services.order.find({ ...ctx.query });
+
+      }
+
+      return entities.map(entity => sanitizeEntity(entity, { model: strapi.models.order }));
     } else {
+      if (ctx.query._q) {
 
-      entities = await strapi.services.order.find({ ...ctx.query });
+        entities = await strapi.services.order.search({ ...ctx.query });
 
+      } else {
+
+        entities = await strapi.services.order.find({ ...ctx.query });
+
+      }
+
+      return entities.filter(entity => entity.user_order.id === id);
     }
 
-    return entities.map(entity => sanitizeEntity(entity, { model: strapi.models.order }));
+
     // let entities;
     // if (ctx.query._q) {
     //   entities = await strapi.services.order.search(ctx.query);
